@@ -62,5 +62,3 @@ Made with [contrib.rocks](https://contrib.rocks).
 ## 📅 Data de Entrega
 
 22 de Novembro de 2024
-
----
