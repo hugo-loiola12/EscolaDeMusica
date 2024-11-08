@@ -1,15 +1,19 @@
 # Sistema de Gerenciamento de Escola de Música 🎶
 
-Este projeto é um **Sistema de Gerenciamento de Escola de Música**, desenvolvido como parte do trabalho de Programação Orientada a Objetos (POO). Ele permite gerenciar cursos, alunos, professores e o agendamento de aulas para uma escola de música.
+Este projeto é um **Sistema de Gerenciamento de Escola de Música**, desenvolvido como parte do trabalho de Programação
+Orientada a Objetos (POO). Ele permite gerenciar cursos, alunos, professores e o agendamento de aulas para uma escola de
+música.
 
 ## 📋 Descrição do Projeto
 
 O sistema gerencia diferentes tipos de cursos, como:
+
 - Instrumento
 - Canto
 - Teoria Musical
 
 ### Funcionalidades:
+
 - **Inscrições** e **cancelamentos** de cursos pelos alunos.
 - **Agendamento** e **cancelamento** de aulas pelos professores.
 - **Monitoramento do progresso** dos alunos.
@@ -49,7 +53,11 @@ O projeto aplica os principais conceitos de POO e padrões de projeto, incluindo
 
 ## 👥 Contribuidores
 
-O projeto foi desenvolvido em grupo, com até 5 integrantes.
+<a href="https://github.com/hugo-loiola12/EscolaDeMusica/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=hugo-loiola12/EscolaDeMusica" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
 
 ## 📅 Data de Entrega
 
