@@ -4,14 +4,38 @@ import br.com.contrato.Agendamento;
 
 public class Professor extends Pessoa implements Agendamento {
 
-    private final String funcao;
-    private final double salario;
-    private final String matricula;
+    private String funcao;
+    private double salario;
+    private int matricula;
 
-    public Professor(String nome, String cpf, int idade, String funcao, double salario, String matricula) {
+    public Professor(String nome, String cpf, int idade, String funcao, double salario, int matricula) {
         super(nome, cpf, idade);
         this.funcao = funcao;
         this.salario = salario;
+        this.matricula = matricula;
+    }
+
+    public String getFuncao() {
+        return funcao;
+    }
+
+    public void setFuncao(String funcao) {
+        this.funcao = funcao;
+    }
+
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    public int getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(int matricula) {
         this.matricula = matricula;
     }
 
