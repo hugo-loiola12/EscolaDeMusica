@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Escola de Música" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="br.com.Main" />
+    <module name="EscolaDeMusica.main" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
