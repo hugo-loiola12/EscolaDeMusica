@@ -7,6 +7,8 @@ import br.com.curso.CursoDeTeoriaMusical;
 import br.com.curso.CursoDeViolao;
 
 public class CursoFactory {
+
+
     public static Curso criarCurso(String tipoCurso, String nivel, int duracao) {
         return switch (tipoCurso.toLowerCase()) {
             case "piano" -> new CursoDePiano(nivel, duracao);

@@ -1,69 +1,109 @@
 package br.com.util.singleton;
 
+import br.com.util.observer.Observer;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class GerenciadorDeAulas {
 
-    //um atributo global do tipo GerenciadorDeAulas que vai servir para guardar a instancia unica
+    //um atributo global do tipo GerenciadorDeAulas que vai servir para guardar a instancia unica.
     //quando criamos um atributo do tipo de uma classe dizemos que ela pode armazenar uma referencia a um objeto do tipo da classe
+
     private static GerenciadorDeAulas instanciaUnica;
 
     //uma lista para guardar os horarios registrados e nao permitir que eles se choquem
-    private List<String> agendamentos = new ArrayList<>();
+
+    private List<String> agendamentos;
+
+    //Objetos que implementam o padrao de projeto observer
+    //essas lista vai receber os objetos que serao notificados
+
+    private List<Observer> observadores;
 
 
-    //criamos um construtor privado para que nao seja possivel instanciar essa classe fora da classe GerenciadorDeAulas(instancia é exclusiva dessa classe).
+    //um construtor privado que impede que essas listas sejam instanciadas fora dessa classe
     private GerenciadorDeAulas() {
+
+        //duas listas vazias que vao receber os agendamentos e os orbservadores
+        agendamentos = new ArrayList<>();
+        observadores = new ArrayList<>();
     }
 
+    //metodo que implementa o singleton
+    public static GerenciadorDeAulas getInstanciaUnica(){
 
-
-
-    //precisamos de um metódo estatico,getter(assim nao é preciso instaciar a classe é so chama-la)
-    //um getter que so permite uma instancia da classe
-    public static GerenciadorDeAulas getInstance(){
+        //se nao existir uma instancia ainda ele cria
+        //caso exista ele retorna essa instancia para quem chamou o metodo(garantindo o acesso a esse objeto para quem chamou)
         if(instanciaUnica == null){
             instanciaUnica = new GerenciadorDeAulas();
-            System.out.println("instancia criada");
         }
+
         return instanciaUnica;
+
     }
 
 
-    //uma classe que cria um horario paraum aluno em algum dia
-    public void agendarAula(String nomeAluno,String professor,String diaAula,String horaAula ){
-
-        //juntando informaçoes necessarias para percorrer a lista de agendamentos
-        String expecificacao = diaAula + " " + horaAula;
-
-        boolean diaOcupado = false;
+    //metodo para adicionar um observador, para alunos e professores matriculados
+    public void adicionarObservador(Observer observador){
+        observadores.add(observador);
+    }
 
 
-        //uma iteraçao que passa por tudo registrado na lista e para se encontrar uma expecificaçao que seja igual
-        for(String agendado : agendamentos){
-            if(agendado.equals(expecificacao)){
+    //metodo que remove um observer caso seja necessario ,um aluno cancelou a incriçao
+    public void removerObservador(Observer observador){
+        observadores.remove(observador);
+    }
 
+    public void notificarObservadores(String mensagem){
 
-                diaOcupado = true;
-                break;
-            }
+        //essa iteraçao percorre a lista observadores e notifica aqueles que tem um observer
+        //com uma mensagem que foi passada como um parametro
+
+        for(Observer x : observadores){
+            x.atualizacaoPendente(mensagem);
         }
 
-        if(diaOcupado){
-            //caso dia ocupado seja verdadeiro
 
-            System.out.format("ja temos uma aula com o professor %s no dia %s as %s\n",nomeAluno,professor,diaAula,horaAula);
+    }
 
+    //metodo responsavel por agendar Aulas para os alunos
+    public void agendarAulas(String nomeAluno,String nomeProfessor,String dia,String hora){
+
+        //concatena os atributos dia e hora
+        String diaHora = dia + " " + hora;
+
+        //confere se a variavel diahora ja esta na lista agendamentos e se estiver
+        //nao insere o horario nem ativa o observer
+        if(agendamentos.contains(diaHora)){
+            System.out.println("Horario ja ocupado");
         }
         else{
-            //caso nao tenha nenhum agendamento semelhante ele adiciona uma nova expecificaçao contendo horario e data a lista "agendamentos"
-            agendamentos.add(expecificacao);
-            System.out.format("%s marcou aula com o professor %s no dia %s as %s\n",nomeAluno,professor,diaAula,horaAula );
-
-
+            agendamentos.add(diaHora);
+            String mensagem = "Aula marcada para" + nomeAluno + " com " +nomeProfessor + " em " + diaHora;
+            System.out.println(mensagem);
+            notificarObservadores(mensagem);
         }
 
     }
 
+    public void cancelarAula(String nomeAluno,String nomeProfessor,String dia,String hora) {
+
+        //concatena os atributos dia e hora
+        String diaHora = dia + " " + hora;
+
+
+        //confere se esse horario esta na lista de horarios e se estiver o remove
+        //se nao estiver diz que nao ha horarios para serem removidos
+         if (agendamentos.remove(diaHora)) {
+
+             String mensagem = "Aula cancelada no dia " + nomeAluno + " com " + nomeProfessor + " no dia " + diaHora;
+             System.out.println(mensagem);
+             notificarObservadores(mensagem);
+         }
+         else{
+             System.out.println("Nao ha o que cancelar nesse horario ");
+         }
+
+    }
 }

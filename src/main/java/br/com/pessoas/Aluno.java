@@ -1,8 +1,8 @@
 package br.com.pessoas;
 
-import br.com.contrato.Agendamento;
+import br.com.util.observer.Observer;
 
-public class Aluno extends Pessoa implements Agendamento {
+public class Aluno extends Pessoa implements Observer {
 
     private int matricula;
 
@@ -20,18 +20,7 @@ public class Aluno extends Pessoa implements Agendamento {
     }
 
     @Override
-    public void agendarAula() {
-
-    }
-
-    @Override
-    public void cancelarAula() {
-
-    }
-
-    public void inscreverCurso() {
-    }
-
-    public void cancelarInscricao() {
+    public void atualizacaoPendente(String mensagem) {
+        System.out.println("Notificação para Aluno " + super.getNome() + ": " + mensagem);
     }
 }
