@@ -1,8 +1,8 @@
 package br.com.pessoas;
 
-import br.com.contrato.Agendamento;
+import br.com.util.observer.Observer;
 
-public class Professor extends Pessoa implements Agendamento {
+public class Professor extends Pessoa implements Observer {
 
     private String funcao;
     private double salario;
@@ -39,11 +39,9 @@ public class Professor extends Pessoa implements Agendamento {
         this.matricula = matricula;
     }
 
-    @Override
-    public void agendarAula() {
-    }
 
     @Override
-    public void cancelarAula() {
+    public void atualizacaoPendente(String mensagem) {
+        System.out.println("Notificaçao para Professor" + super.getNome() + ": " + mensagem);
     }
 }
